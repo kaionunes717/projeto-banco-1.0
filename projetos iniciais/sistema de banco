@@ -1,6 +1,7 @@
 import time
-idade =18
+idade = 18
 senha = "1234"
+
 while True:
     usuario = input("Digite seu usuário: ")
     senha = input("Digite sua senha: ")
@@ -19,23 +20,32 @@ while True:
 # banco python
 saldo = 0
 while True:
- opçao = input("Digite 1 para consultar saldo, 2 para sacar, " \
- "3 para depositar e 4 para sair: ")
- if opçao == "1":
-    print(f"Seu saldo é de R${saldo}") 
- elif opçao == "2":
-    valor = float(input("Digite o valor que deseja sacar: "))
-    if valor > saldo:
-        print("Saldo insuficiente.")
+    opçao = input("Digite 1 para consultar saldo, 2 para sacar, 3 para depositar e 4 para sair: ")
+    if opçao == "1":
+        print(f"Seu saldo é de R${saldo}")
+    elif opçao == "2":
+        valor = float(input("Digite o valor que deseja sacar: "))
+        if valor > saldo:
+            print("Saldo insuficiente.")
+        else:
+            saldo -= valor
+            print(f"Saque realizado com sucesso. Seu saldo atual é de R${saldo}")
+    elif opçao == "3":
+        valor = float(input("Digite o valor que deseja depositar: "))
+        saldo += valor
+        print(f"Depósito realizado com sucesso. Seu saldo atual é de R${saldo}")
+    elif opçao == "4":
+        break
     else:
-        saldo -= valor
-        print(f"Saque realizado com sucesso. Seu saldo atual é de R${saldo}")
- elif opçao == "3":
-    valor = float(input("Digite o valor que deseja depositar: "))
-    saldo += valor
-    print(f"Depósito realizado com sucesso. Seu saldo atual é de R${saldo}")
- elif opçao == "4":
-    print("Obrigado por usar nosso banco!")
-    break
- else:
-    print("Opção inválida. Tente novamente.")
+        print("Opção inválida. Tente novamente.")
+
+print("Obrigado por usar nosso banco!")
+
+avaliaçao = input("Digite sua avaliação do nosso banco (1 a 5): ")
+if avaliaçao == "5":
+    print("Obrigado pela avaliação positiva!")
+elif avaliaçao in ["4", "3", "2", "1"]:
+    print("Obrigado pela avaliação! Vamos trabalhar para melhorar.")
+else:
+    print("Avaliação inválida. Por favor, digite um número de 1 a 5.")   
+    
