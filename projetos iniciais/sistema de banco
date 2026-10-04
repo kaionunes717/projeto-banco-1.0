@@ -20,31 +20,55 @@ while True:
 # banco python
 saldo = 0
 while True:
-    opçao = input("Digite 1 para consultar saldo, 2 para sacar, 3 para depositar e 4 para sair: ")
-    if opçao == "1":
+    opcao = input("Digite 1 para consultar saldo, 2 para sacar, 3 para depositar e 4 para sair: ")
+    if opcao == "1":
         print(f"Seu saldo é de R${saldo}")
-    elif opçao == "2":
-        valor = float(input("Digite o valor que deseja sacar: "))
-        if valor > saldo:
-            print("Saldo insuficiente.")
-        else:
-            saldo -= valor
-            print(f"Saque realizado com sucesso. Seu saldo atual é de R${saldo}")
-    elif opçao == "3":
-        valor = float(input("Digite o valor que deseja depositar: "))
-        saldo += valor
-        print(f"Depósito realizado com sucesso. Seu saldo atual é de R${saldo}")
-    elif opçao == "4":
+    elif opcao == "2":
+        while True:
+            valor = float(input("Digite o valor que deseja sacar: "))
+            if valor <= 0:
+                print("Valor inválido. Tente novamente.")
+                continue
+            deseja = input("Deseja mesmo sacar esse valor? (sim/não): ").strip().lower()
+            if deseja in ("nao", "não"):
+                print("Saque cancelado.")
+                break
+            elif deseja == "sim":
+                if valor > saldo:
+                    print("Saldo insuficiente.")
+                else:
+                    saldo -= valor
+                    print(f"Saque realizado com sucesso. Seu saldo atual é de R${saldo}")
+                break
+            else:
+                print("Nenhuma opção selecionada. Tente novamente.")
+    elif opcao == "3":
+        while True:
+            valor = float(input("Digite o valor que deseja depositar: "))
+            if valor <= 0:
+                print("Valor inválido. Tente novamente.")
+                continue
+            deseja = input("Deseja mesmo depositar esse valor? (sim/não): ").strip().lower()
+            if deseja in ("nao", "não"):
+                print("Depósito cancelado.")
+                break
+            elif deseja == "sim":
+                saldo += valor
+                print(f"Depósito realizado com sucesso. Seu saldo atual é de R${saldo}")
+                break
+            else:
+                print("Nenhuma opção selecionada. Tente novamente.")
+    elif opcao == "4":
         break
     else:
         print("Opção inválida. Tente novamente.")
 
 print("Obrigado por usar nosso banco!")
 
-avaliaçao = input("Digite sua avaliação do nosso banco (1 a 5): ")
-if avaliaçao == "5":
+avaliacao = input("Digite sua avaliação do nosso banco (1 a 5): ")
+if avaliacao == "5":
     print("Obrigado pela avaliação positiva!")
-elif avaliaçao in ["4", "3", "2", "1"]:
+elif avaliacao in ["4", "3", "2", "1"]:
     print("Obrigado pela avaliação! Vamos trabalhar para melhorar.")
 else:
     print("Avaliação inválida. Por favor, digite um número de 1 a 5.")   
