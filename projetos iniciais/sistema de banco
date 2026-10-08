@@ -1,41 +1,9 @@
 import time
-from abc import ABC, abstractmethod
-
 idade = 18
 
 usuarios = (("kaio", "1234"), ("lucas", "5678"), ("andre", "2213"))
 
-
-class destinatario(ABC):
-    def __init__(self, nome):
-        self.nome = nome
-
-    @abstractmethod
-    def verificar_destinatario(self):
-        """Valida se o destinatário pode receber a transferência."""
-        pass
-
-    @abstractmethod
-    def mostrar_detalhes(self):
-        """Retorna uma descrição útil do destinatário."""
-        pass
-
-    @abstractmethod
-    def processar_transferencia(self, valor):
-        """Registra a transferência no destinatário."""
-        pass
-
-
-class destinatario_bancario(destinatario):
-    def verificar_destinatario(self):
-        return bool(self.nome.strip()) and bool(self.conta.strip())
-
-    def mostrar_detalhes(self):
-        return f"{self.nome} (Conta: {self.conta})"
-
-    def processar_transferencia(self, valor):
-        return f"Transferência enviada para {self.nome} no valor de R${valor:.2f}."
-
+contas = {"kaio": "1234","lucas":"5678", "andre":"2213"}
 
 while True:
     usuario = input("Digite seu usuário: ")
@@ -106,48 +74,47 @@ while True:
         print("Obrigado por usar nosso banco!")
         break
     elif opcao == "5":
-        while True:
-            nome_destinatario = input("Digite o nome do destinatario: ").strip()
-
-            destinatario_obj = destinatario_bancario(nome_destinatario)
-            if not destinatario_obj.verificar_destinatario():
-                print("Dados do destinatário inválidos. Tente novamente.")
-                continue
-
-            if nome_destinatario.lower() not in [nome.lower() for nome, _ in usuarios]:
-                print("Destinatário não encontrado. Tente novamente.")
-                break
-
-            valor = float(input("Digite o valor da transferência: "))
-            if valor <= 0:
-                print("Valor inválido. Tente novamente.")
-                continue
-            if valor > saldo:
-                print("Saldo insuficiente para realizar a transferência.")
-                break
-
-            deseja = input(f"Deseja mesmo transferir R${valor:.2f} para {destinatario_obj.mostrar_detalhes()}? (sim/não): ").strip().lower()
+       while True:
+            destinatario = input ("digite o destinatario: ")
+            
+            if destinatario not in contas:
+             print ("destinario não encontrado")
+             break
+            valor = float(input ("qual valor deseja tranferir?: "))
+            if valor<=0:
+              print("valor invalido. tente novamente.")
+              continue
+            deseja = input("deseja mesmo transferir este valor? (sim/nao): ").strip() .lower()
             if deseja in ("nao", "não"):
-                print("Transferência cancelada.")
-                break
+             print ("tranferencia cancelada")
+             break
             elif deseja == "sim":
-                saldo -= valor
-                print(destinatario_obj.processar_transferencia(valor))
-                print(f"Seu saldo atual é de R${saldo}")
+             senha = input("digite sua senha para transferir: ")
+            
+            if senha == contas[usuario]:
+               print ("verificando...")
+               time.sleep(2)
+               if saldo < valor:
+                print (f"saldo insuficiente, tranferencia cancelada.")
                 break
+               else:
+                saldo -= valor
+                print (f"tranferencia realizada com sucesso, seu saldo é de R${saldo}")
+                break
+            
             else:
-                print("Nenhuma opção selecionada. Tente novamente.")
-    else:
-        print("Opção inválida. Tente novamente.")
+             print ("nao foi possivel realizar a tranferencia, tente novamente.")
+             break
+    
 
 while True:
-    avaliacao = input("Digite sua avaliação do nosso banco (1 a 5): ")
-    if avaliacao == "5":
+      avaliacao = input("Digite sua avaliação do nosso banco (1 a 5): ")
+      if avaliacao == "4":
         print("Obrigado pela avaliação positiva!")
         break
-    elif avaliacao in ["4", "3", "2", "1"]:
+      elif avaliacao in ["4", "3", "2", "1"]:
         print("Obrigado pela avaliação! Vamos trabalhar para melhorar.")
         break
-    else:
+      else:
         print("Avaliação inválida. Por favor, digite um número de 1 a 5.")   
         
