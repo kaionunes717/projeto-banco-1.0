@@ -46,6 +46,10 @@ while True:
                 print("Saque cancelado.")
                 break
             elif deseja == "sim":
+                senha =  input("digite sua senha:")
+                if  senha == contas[usuario]:
+                 print ("verificando...")
+                 time.sleep(2)
                 if valor > saldo:
                     print("Saldo insuficiente.")
                 else:
@@ -53,7 +57,7 @@ while True:
                     print(f"Saque realizado com sucesso. Seu saldo atual é de R${saldo}")
                 break
             else:
-                print("Nenhuma opção selecionada. Tente novamente.")
+                print("senha incorreta, tente novamente.")
     elif opcao == "3":
         while True:
             valor = float(input("Digite o valor que deseja depositar: "))
@@ -64,12 +68,17 @@ while True:
             if deseja in ("nao", "não"):
                 print("Depósito cancelado.")
                 break
+            
             elif deseja == "sim":
+                senha = input ("digite sua senha:")
+            if senha == contas[usuario]: 
+                print ("verificando...")
+                time.sleep(2)
                 saldo += valor
                 print(f"Depósito realizado com sucesso. Seu saldo atual é de R${saldo}")
                 break
             else:
-                print("Nenhuma opção selecionada. Tente novamente.")
+                print ("senha incorreta, tente novamente.")
     elif opcao == "4":
         print("Obrigado por usar nosso banco!")
         break
@@ -106,6 +115,7 @@ while True:
              print ("nao foi possivel realizar a tranferencia, tente novamente.")
              break
     
+# avaliaçao banco python
 
 while True:
       avaliacao = input("Digite sua avaliação do nosso banco (1 a 5): ")
